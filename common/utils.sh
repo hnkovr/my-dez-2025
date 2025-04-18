@@ -1,6 +1,10 @@
 #!/bin/bash
-source "$(dirname "$0")/logger.sh"
-source "$(dirname "$0")/conf.sh"
+SRC_DIR=$(pwd)
+cd /Users/github/@dataengy/my-dez-2025/common/
+#source "$(dirname "$0")/logger.sh"
+#source "$(dirname "$0")/conf.sh"
+. logger.sh
+. conf.sh
 
 assert_file() {
   local file="$1"
@@ -21,3 +25,5 @@ load_env() {
     log_warn "${FUNCNAME[0]}" "${BASH_SOURCE[0]}" "$LINENO" "No .env found"
   fi
 }
+
+cd $SRC_DIR

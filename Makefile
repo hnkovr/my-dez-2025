@@ -44,7 +44,9 @@ show_reqs:
 
 ##reinstall: show_reqs uninstall install
 reinstall:
-	sh install-with-fixes.Claude-1.sh
+	#sh install-Claude-2.1.sh
+	sh install-Claude-2.1-uv.sh
+	#^sh install-with-fixes.Claude-1.sh
 
 run: ## Run CLI hello
 	PYTHONPATH=src python src/main.py hello
@@ -71,10 +73,13 @@ bi-down: ## Stop Metabase
 	docker-compose -f docker/metabase.yml down
 
 # DAGSTER
-dag-up: install ## Start Dagster UI
+##dag-up: install ## Start Dagster UI
+dag-up: ## Start Dagster UI
 	echo "# dag-up: ## Start Dagster UI"  && \
+	. common/utils.sh && load_env  && \
 	. .venv/bin/activate  && \
 	cd dagster_project && dagster dev
+	open http://127.0.0.1:3000
 
 #dag-install: ## Install Dagster deps
 #	. .venv/bin/activate  && \

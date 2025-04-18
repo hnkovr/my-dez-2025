@@ -1,0 +1,22 @@
+my_dez_2025:
+  outputs:
+    source:
+      dbname: "{{ env_var('POSTGRES_DBNAME') }}"
+      host: "{{ env_var('POSTGRES_HOST') }}"
+      pass: "{{ env_var('POSTGRES_PASSWORD') }}"
+      port: "{{ env_var('POSTGRES_PORT') }}"
+      schema: dbt
+      threads: 4
+      type: postgres
+      user: "{{ env_var('POSTGRES_USER') }}"
+  target: source
+
+
+#  POSTGRES_HOST=YOUR_POSTGRES_HOST
+#  POSTGRES_PORT=YOUR_POSTGRES_PORT
+#  POSTGRES_USER=YOUR_POSTGRES_USER
+#  POSTGRES_PASSWORD=YOUR_POSTGRES_PASSWORD
+#  POSTGRES_DBNAME=YOUR_POSTGRES_DBNAME
+#  TG_TOKEN=YOUR_TELEGRAM_TOKEN
+#  TG_CHAT_ID=YOUR_TELEGRAM_CHAT_ID
+
