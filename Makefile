@@ -49,6 +49,9 @@ reinstall:
 	#^sh install-with-fixes.Claude-1.sh
 
 run: ## Run CLI hello
+	sh common/load_envs.sh  && \
+	. .venv/bin/activate  && \
+	which python  && \
 	PYTHONPATH=src python src/main.py hello
 
 ingest: ## Ingest parquet+csv to DuckDB
@@ -56,6 +59,8 @@ ingest: ## Ingest parquet+csv to DuckDB
 
 # DBT
 dbt-init: ## Init DBT (debug)
+	. .venv/bin/activate  && \
+	. common/utils.sh && load_env .env && \
 	cd dbt && dbt debug
 
 dbt-run: ## Run DBT models
@@ -73,11 +78,13 @@ bi-down: ## Stop Metabase
 	docker-compose -f docker/metabase.yml down
 
 # DAGSTER
+#	sh common/load_envs.sh  && \
 ##dag-up: install ## Start Dagster UI
+
 dag-up: ## Start Dagster UI
 	echo "# dag-up: ## Start Dagster UI"  && \
-	. common/utils.sh && load_env  && \
 	. .venv/bin/activate  && \
+	sh common/utils.sh ..load_env && \
 	cd dagster_project && dagster dev
 	open http://127.0.0.1:3000
 

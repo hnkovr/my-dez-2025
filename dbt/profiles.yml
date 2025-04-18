@@ -1,3 +1,4 @@
+# ./dbt/profiles.yml:1
 my_dez_2025:
   outputs:
     source:
