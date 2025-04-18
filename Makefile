@@ -9,27 +9,49 @@ $(call log,"Running: $1")
 $1
 endef
 
-install: ## Install dependencies via uv
+install: ## Install Python deps
 	uv venv .venv
 	source .venv/bin/activate && uv pip install -r requirements.txt
 
-run: ## Run hello CLI
+run: ## Run CLI hello
 	PYTHONPATH=src python src/main.py hello
 
-ingest: ## Load parquet + csv into DuckDB
+ingest: ## Ingest parquet+csv to DuckDB
 	PYTHONPATH=src python src/ingest_oltp.py
 
-dbt-init: ## Run dbt debug and setup
+# DBT
+dbt-init: ## Init DBT (debug)
 	cd dbt && dbt debug
 
-dbt-run: ## Run dbt models
+dbt-run: ## Run DBT models
 	cd dbt && dbt run
 
-dbt-docs: ## Serve docs
+dbt-docs: ## Serve DBT docs
 	cd dbt && dbt docs generate && dbt docs serve
 
-bi-up: ## Launch Metabase (docker)
+# METABASE
+bi-up: ## Start Metabase in Docker
 	docker-compose -f docker/metabase.yml up -d
 
 bi-down: ## Stop Metabase
 	docker-compose -f docker/metabase.yml down
+
+# DAGSTER
+dag-up: ## Start Dagster UI
+	. .venv/bin/activate  && \
+	cd dagster_project && dagster dev
+
+dag-install: ## Install Dagster deps
+	. .venv/bin/activate  && \
+	uv pip install dagster dagster-webserver
+
+dag-run: ## Trigger Dagster job locally
+	. .venv/bin/activate  && \
+	dagster job launch --job ingest_job --workspace dagster_project/workspace.yaml
+
+# CLEANUP
+clean: ## Remove build/data artifacts
+	rm -rf .venv data/*.duckdb __pycache__
+
+help: ## Show this help
+	@awk -F':.*##' '/^[a-zA-Z_-]+:.*##/ {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
