@@ -13,3 +13,13 @@ logs/
 
 
 /.archive/
+/data/taxi_zone_lookup.csv
+/data/yellow_tripdata_2025-01.parquet
+/.next_gen.sh
+
+
+.env.local
+.env.template
+.gitignore
+.gptignore
+.pytest_cache/

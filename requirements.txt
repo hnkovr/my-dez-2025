@@ -3,5 +3,8 @@ click
 duckdb
 requests
 
+PyYAML
+python-dotenv
+
 pytest
 

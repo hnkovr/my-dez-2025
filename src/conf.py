@@ -3,6 +3,9 @@ import yaml, os
 from fastcore.basics import store_attr
 from dotenv import load_dotenv
 
+
+# OopCompanion:suppressRename
+
 class Config:
     def __init__(self, path='config.yaml'):
         load_dotenv()

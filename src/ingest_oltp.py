@@ -1,11 +1,12 @@
 import duckdb
 from pathlib import Path
-from src.logger import get_logger
+from logger import get_logger
 
 log = get_logger("ingest")
 
+##!? fixme DATA_PATH = Path("../data")
 DATA_PATH = Path("data")
-DB_PATH = "data/nyc_trips.duckdb"
+DB_PATH = DATA_PATH / "nyc_trips.duckdb"
 
 def main():
     con = duckdb.connect(DB_PATH)

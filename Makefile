@@ -23,16 +23,33 @@ help:  ## Show this help
 	@awk -F':.*##' '/^[a-zA-Z_-]+:.*##/ {printf "  \033[36m%-16s\033[0m %s\n", $1, $2}' $(MAKEFILE_LIST)
 
 install: ## Create venv & install requirements
-	uv venv .venv
-	source .venv/bin/activate && uv pip install -r requirements.txt
+	#uv venv .venv
+	python -c 'import sys;print(f"# {sys.executable = }")'  && \
+	. .venv/bin/activate && uv pip install -r requirements.txt
 
-activate: ## Activate virtualenv
-	. .venv/bin/activate
+#_: ## Activate virtualenv
+#	. .venv/bin/activate
+#
+#activate: ## Activate virtualenv
+#	. .venv/bin/activate  && \
+#	which python
+
+##make activate  && \
 
 run: ## Run entry script
-	python3 src/main.py
+	. .venv/bin/activate  && \
+	PYTHONPATH=src python src/main.py hello
 
-test:
-	. .venv/bin/activate
-	pytest tests/
+ingest: ## Run DuckDB ingest
+	. .venv/bin/activate  && \
+	PYTHONPATH=src python src/ingest_oltp.py
 
+test: _
+	. .venv/bin/activate  && \
+	PYTHONPATH=src python -m pytest tests/
+
+#load: _
+#	. .venv/bin/activate  && \
+#	which python  && \
+#	make install  && \
+#	PYTHONPATH=src python src/main.py hello

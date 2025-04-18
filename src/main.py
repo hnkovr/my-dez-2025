@@ -1,6 +1,8 @@
+import sys;print(f"# {sys.executable = }")
+
 import click
-from src.logger import get_logger
-from src.conf import config
+from logger import get_logger
+from conf import config
 
 log = get_logger()
 
