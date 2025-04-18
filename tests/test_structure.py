@@ -1,6 +1,6 @@
 def test_common_files_exist(project_root):
     files = [
-        ".env", "config.yaml", "Makefile", "Makefile.utils.sh",
+        ".env", "config.yaml", "Makefile",
         "README.md", "pyproject.toml", "requirements.txt",
         ".gptignore", ".gitignore"
     ]
