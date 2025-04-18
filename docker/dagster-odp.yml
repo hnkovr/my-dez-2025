@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  dagster:
+    image: dagster/dagster-webserver
+    ports:
+      - "3001:3000"
+    environment:
+      DAGSTER_HOME: /opt/dagster/dagster_home
+    volumes:
+      - ./dagster_project:/opt/dagster/app
+      - dagster_data:/opt/dagster/dagster_home
+    working_dir: /opt/dagster/app
+
+volumes:
+  dagster_data:

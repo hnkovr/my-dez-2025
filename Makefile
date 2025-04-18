@@ -10,8 +10,9 @@ $1
 endef
 
 install: ## Install Python deps
-	uv venv .venv
-	source .venv/bin/activate && uv pip install -r requirements.txt
+	uv venv .venv  && \
+	. .venv/bin/activate  && \
+	uv pip install -r requirements.txt
 
 run: ## Run CLI hello
 	PYTHONPATH=src python src/main.py hello
@@ -48,6 +49,11 @@ dag-install: ## Install Dagster deps
 dag-run: ## Trigger Dagster job locally
 	. .venv/bin/activate  && \
 	dagster job launch --job ingest_job --workspace dagster_project/workspace.yaml
+
+dag-odp: ## Launch Dagster-ODP (Docker)
+	pwd
+	ls docker/dagster-odp.yml
+	docker compose -f docker/dagster-odp.yml up -d
 
 # CLEANUP
 clean: ## Remove build/data artifacts

@@ -8,7 +8,8 @@ python-dotenv
 
 pytest
 
-dbt-clickhouse
+dbt-clickhouse>=1.7.0
 
 dagster
 dagster-webserver
+dagster-dbt>=0.21.0
