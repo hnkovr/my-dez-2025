@@ -5,6 +5,3 @@ description = "Minimal DE Zoomcamp 2025 pipeline using DuckDB + ClickHouse + dbt
 authors = [{name = "vndv", email = "you@example.com"}]
 license = "MIT"
 requires-python = ">=3.12"
-
-[tool.uv]
-virtualenvs.in-project = true

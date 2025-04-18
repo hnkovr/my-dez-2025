@@ -1,7 +1,14 @@
+.gen_*.sh
 __pycache__/
 *.db
 .venv/
 .env
-.env.*
+#.env.*
 logs/
+
+#my1
+.idea/
+    .idea/misc.xml
+    .idea/vcs.xml
+
 
