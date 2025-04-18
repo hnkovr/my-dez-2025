@@ -1,5 +1,6 @@
 # ./dbt/profiles.yml
 my_dez_2025:
+  target: source
   outputs:
     source:
       dbname: "{{ env_var('POSTGRES_DBNAME') }}"
@@ -10,4 +11,11 @@ my_dez_2025:
       threads: 4
       type: postgres
       user: "{{ env_var('POSTGRES_USER') }}"
-  target: source
+    prod:
+      schema: default
+      type: clickhouse
+      port: 8123
+      host: '{{ env_var(''CLICKHOUSE_HOST'') }}'
+      user: '{{ env_var(''CLICKHOUSE_USER'') }}'
+      password: '{{ env_var(''CLICKHOUSE_PASSWORD'') }}'
+      threads: 11
