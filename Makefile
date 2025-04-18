@@ -11,17 +11,31 @@ endef
 
 #	uv pip install setuptools wheel  && \
 
+redag: reinstall dag-up dag-run
+
 install: ## Install Python deps
+	set -e  && \
+	echo "# INSTALL"  && \
 	uv venv .venv  && \
 	. .venv/bin/activate  && \
 	uv pip install -r requirements.txt  && \
+	uv pip install 'pendulum==2.1.2' --only-binary :all:  && \
 	python -c "from dagster_dbt import load_assets_from_dbt_project; print('✅ dagster_dbt: OK')"
 
 uninstall:
-	. .venv/bin/activate  && \
-	uv pip uninstall dagster dagster-webserver dagster-dbt dbt-core dbt-clickhouse pendulum
+	echo "# UNINSTALL"  && \
+	set -ex  && \
+  	rm -rf .venv && \
+  	pwd
 
-reinstall: uninstall install
+	#. .venv/bin/activate  && \
+#	uv pip uninstall dagster dagster-webserver dagster-dbt dbt-core dbt-clickhouse pendulum
+
+show_reqs:
+	clear
+	cat requirements.txt
+
+reinstall: show_reqs uninstall install
 
 run: ## Run CLI hello
 	PYTHONPATH=src python src/main.py hello
@@ -34,6 +48,7 @@ dbt-init: ## Init DBT (debug)
 	cd dbt && dbt debug
 
 dbt-run: ## Run DBT models
+	echo "# dbt-run: ## Run DBT models"  && \
 	cd dbt && dbt run
 
 dbt-docs: ## Serve DBT docs
@@ -48,6 +63,7 @@ bi-down: ## Stop Metabase
 
 # DAGSTER
 dag-up: ## Start Dagster UI
+	echo "# dag-up: ## Start Dagster UI"  && \
 	. .venv/bin/activate  && \
 	cd dagster_project && dagster dev
 
