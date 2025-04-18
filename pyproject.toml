@@ -1,0 +1,10 @@
+[project]
+name = "my-dez-2025"
+version = "0.1.0"
+description = "Minimal DE Zoomcamp 2025 pipeline using DuckDB + ClickHouse + dbt + Metabase"
+authors = [{name = "vndv", email = "you@example.com"}]
+license = "MIT"
+requires-python = ">=3.12"
+
+[tool.uv]
+virtualenvs.in-project = true

@@ -1,0 +1,4 @@
+fastcore
+click
+duckdb
+requests

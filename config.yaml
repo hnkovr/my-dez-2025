@@ -1,0 +1,5 @@
+project: my-dez-2025
+paths:
+  data: ./data
+  logs: ./logs
+  src: ./src
