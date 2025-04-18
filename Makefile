@@ -17,13 +17,15 @@ setup-repo:
 
 redag: reinstall dag-up dag-run
 
-install: ## Install Python deps
+install:
 	set -e  && \
 	echo "# INSTALL"  && \
 	uv venv .venv  && \
 	. .venv/bin/activate  && \
+	uv pip install 'pendulum>=2.0.0,<3.0.0' && \
 	uv pip install -r requirements.txt  && \
 	pwd
+
 #	uv pip install 'pendulum==2.1.2' --only-binary :all:  && \
 #	python -c "from dagster_dbt import load_assets_from_dbt_project; print('✅ dagster_dbt: OK')"
 
