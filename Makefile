@@ -13,8 +13,6 @@ setup-repo:
 	git config --global --add safe.directory .
 	git config --global --add safe.directory /Users/github/@dataengy/my-dez-2025
 
-#	uv pip install setuptools wheel  && \
-
 redag: reinstall dag-up dag-run
 
 install:
@@ -44,9 +42,7 @@ show_reqs:
 
 ##reinstall: show_reqs uninstall install
 reinstall:
-	#sh install-Claude-2.1.sh
-	sh install-Claude-2.1-uv.sh
-	#^sh install-with-fixes.Claude-1.sh
+	sh docker/install-Claude-2.1-uv.sh
 
 run: ## Run CLI hello
 	sh common/load_envs.sh  && \
@@ -55,16 +51,21 @@ run: ## Run CLI hello
 	PYTHONPATH=src python src/main.py hello
 
 ingest: ## Ingest parquet+csv to DuckDB
+	. common/load_envs.sh  && \
+	. .venv/bin/activate  && \
 	PYTHONPATH=src python src/ingest_oltp.py
 
 # DBT
 dbt-init: ## Init DBT (debug)
 	. .venv/bin/activate  && \
 	. common/utils.sh && load_env .env && \
+	uv pip install dbt-postgres
 	cd dbt && dbt debug
 
 dbt-run: ## Run DBT models
 	echo "# dbt-run: ## Run DBT models"  && \
+	. .venv/bin/activate  && \
+	. common/utils.sh && load_env && \
 	cd dbt && dbt run
 
 dbt-docs: ## Serve DBT docs
@@ -78,13 +79,10 @@ bi-down: ## Stop Metabase
 	docker-compose -f docker/metabase.yml down
 
 # DAGSTER
-#	sh common/load_envs.sh  && \
-##dag-up: install ## Start Dagster UI
-
 dag-up: ## Start Dagster UI
 	echo "# dag-up: ## Start Dagster UI"  && \
 	. .venv/bin/activate  && \
-	sh common/utils.sh ..load_env && \
+	. common/utils.sh && load_env && \
 	cd dagster_project && dagster dev
 	open http://127.0.0.1:3000
 
