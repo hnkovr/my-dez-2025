@@ -9,6 +9,10 @@ $(call log,"Running: $1")
 $1
 endef
 
+setup-repo:
+	git config --global --add safe.directory .
+	git config --global --add safe.directory /Users/github/@dataengy/my-dez-2025
+
 #	uv pip install setuptools wheel  && \
 
 redag: reinstall dag-up dag-run
@@ -19,8 +23,9 @@ install: ## Install Python deps
 	uv venv .venv  && \
 	. .venv/bin/activate  && \
 	uv pip install -r requirements.txt  && \
-	uv pip install 'pendulum==2.1.2' --only-binary :all:  && \
-	python -c "from dagster_dbt import load_assets_from_dbt_project; print('✅ dagster_dbt: OK')"
+	pwd
+#	uv pip install 'pendulum==2.1.2' --only-binary :all:  && \
+#	python -c "from dagster_dbt import load_assets_from_dbt_project; print('✅ dagster_dbt: OK')"
 
 uninstall:
 	echo "# UNINSTALL"  && \
@@ -35,7 +40,9 @@ show_reqs:
 	clear
 	cat requirements.txt
 
-reinstall: show_reqs uninstall install
+##reinstall: show_reqs uninstall install
+reinstall:
+	sh install-with-fixes.Claude-1.sh
 
 run: ## Run CLI hello
 	PYTHONPATH=src python src/main.py hello
@@ -62,7 +69,7 @@ bi-down: ## Stop Metabase
 	docker-compose -f docker/metabase.yml down
 
 # DAGSTER
-dag-up: ## Start Dagster UI
+dag-up: install ## Start Dagster UI
 	echo "# dag-up: ## Start Dagster UI"  && \
 	. .venv/bin/activate  && \
 	cd dagster_project && dagster dev

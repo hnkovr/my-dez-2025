@@ -1,7 +1,31 @@
 [project]
-name = "my-dez-2025"
+name = "inzhenerka_dagster"
 version = "0.1.0"
-description = "Minimal DE Zoomcamp 2025 pipeline using DuckDB + ClickHouse + dbt + Metabase"
-authors = [{name = "vndv", email = "you@example.com"}]
-license = "MIT"
-requires-python = ">=3.12"
+description = "Dagster project with dbt integration"
+readme = "README.md"
+requires-python = ">=3.9,<3.13"
+dependencies = [
+  "dagster",
+  "pandas",
+  "fastparquet",
+  "pyarrow",
+  "psycopg2-binary",
+  "sqlalchemy",
+  "python-dotenv",
+  "dbt-core",
+  "dbt-postgres",
+  "dagster-dbt"
+]
+
+[project.optional-dependencies]
+dev = [
+  "dagster-webserver",
+  "pytest",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.dagster]
+module_name = "inzhenerka_dagster"

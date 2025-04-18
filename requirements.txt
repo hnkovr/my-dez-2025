@@ -33,4 +33,4 @@ dagster-webserver==1.6.8
 dagster-dbt==0.21.6
 dbt-core==1.6.8
 dbt-clickhouse==1.6.8
-pendulum==2.1.2
+#! pendulum==2.1.2
