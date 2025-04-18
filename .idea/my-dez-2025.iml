@@ -5,6 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/.archive" />
       <excludeFolder url="file://$MODULE_DIR$/.archive/Users/nk.myg/github/@dataengy/my-dez-2025/common/logger.sh /Users/nk.myg/github/@dataengy/my-dez-2025/.env/python3" />
       <excludeFolder url="file://$MODULE_DIR$/.archive/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/.stash" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.12 virtualenv at ~/github/@dataengy/my-dez-2025/.venv (2)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
