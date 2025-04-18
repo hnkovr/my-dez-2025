@@ -2,3 +2,6 @@ fastcore
 click
 duckdb
 requests
+
+pytest
+
