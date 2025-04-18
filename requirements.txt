@@ -8,8 +8,25 @@ python-dotenv
 
 pytest
 
-dbt-clickhouse>=1.7.0
+##
+#dbt-core==1.9.4
+##dbt-clickhouse
+#dbt-clickhouse>=1.7.0
+#dagster==1.6.8
+#dagster-webserver==1.6.8
+#dagster-dbt==0.21.6
+###pendulum<3.0.0
+#pendulum==2.1.2
 
-dagster
-dagster-webserver
-dagster-dbt>=0.21.0
+dbt-core
+dbt-clickhouse
+
+dagster==1.6.5
+dagster-webserver==1.6.5
+##dagster-dbt==0.21.0
+#   ╰─▶ Because dagster-dbt==0.21.0 depends on dagster==1.5.0 and you require dagster==1.6.5, we can conclude that your requirements and
+dagster-dbt
+dbt-clickhouse==1.6.1
+clickhouse-driver==0.2.6
+python-dotenv==1.0.0
+

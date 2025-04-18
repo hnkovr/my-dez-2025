@@ -9,10 +9,19 @@ $(call log,"Running: $1")
 $1
 endef
 
+#	uv pip install setuptools wheel  && \
+
 install: ## Install Python deps
 	uv venv .venv  && \
 	. .venv/bin/activate  && \
-	uv pip install -r requirements.txt
+	uv pip install -r requirements.txt  && \
+	python -c "from dagster_dbt import load_assets_from_dbt_project; print('✅ dagster_dbt: OK')"
+
+uninstall:
+	. .venv/bin/activate  && \
+	uv pip uninstall dagster dagster-webserver dagster-dbt dbt-core dbt-clickhouse pendulum
+
+reinstall: uninstall install
 
 run: ## Run CLI hello
 	PYTHONPATH=src python src/main.py hello
@@ -42,9 +51,9 @@ dag-up: ## Start Dagster UI
 	. .venv/bin/activate  && \
 	cd dagster_project && dagster dev
 
-dag-install: ## Install Dagster deps
-	. .venv/bin/activate  && \
-	uv pip install dagster dagster-webserver
+#dag-install: ## Install Dagster deps
+#	. .venv/bin/activate  && \
+#	uv pip install dagster dagster-webserver
 
 dag-run: ## Trigger Dagster job locally
 	. .venv/bin/activate  && \
