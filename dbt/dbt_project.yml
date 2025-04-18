@@ -1,0 +1,5 @@
+name: my_dez_2025
+version: "1.0"
+profile: my_dez_2025
+model-paths: ["models"]
+macro-paths: ["macros"]

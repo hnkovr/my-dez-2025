@@ -18,7 +18,3 @@ make run
 - Transforms: dbt
 - Dashboard: Metabase
 - Orchestration: Makefile + utils.sh (optional: Dagster)
-
-## Authors
-
-- @vndv, 2025
